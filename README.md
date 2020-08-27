@@ -1,8 +1,7 @@
 # ToIP Deliverable Identifier Generator
 This repo is generates unique identifiers for ToIP Deliverables.
 
-It is connected to Github Pages. It serves [a simple webpage](
-https://dhh1128.github.io/assign-aries-rfc-num/)
+It is connected to Github Pages. It serves [a simple webpage](https://trustoverip.github.io/next-deliverable-num/)
 that tells you what `unique number` you should pick for your new <a target="_blank" href="https://github.com/trustoverip/deliverables/blob/master/README.md">
 ToIP Deliverable Submission</a>.
 
