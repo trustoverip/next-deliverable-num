@@ -16,23 +16,49 @@ body {
 }
     </style>
     <script>
-function parseResponse() {
-    var txt = this.responseText;
-    var idx = txt.search("/pulls/");
-    idx += 7;
-    endOfNum = txt.indexOf('"', idx);
-    nextNum = parseInt(txt.substring(idx, endOfNum)) + 1;
-    document.getElementById("num").innerText = nextNum.toString().padStart(4, '0');
-}
 
-function getNum() {
-    var request = new XMLHttpRequest();
-    request.onload = parseResponse;
-    request.open('get', 'https://api.github.com/repos/trustoverip/deliverables/pulls?state=all&per_page=1');
-    request.send()
-}
+requestData = (href) => new Promise((resolve, reject) => {
+    fetch(href)
+    .then((response) => {
+        return response.json();
+    })
+    .then(data => {
+        return resolve(data);
+    }).catch((err) => {
+        console.warn('Request Error.', err);
+        return reject(err);
+    });
+});
 
-document.addEventListener('DOMContentLoaded', getNum);
+
+number = () => new Promise((resolve, reject) => {
+    requestData('https://api.github.com/orgs/trustoverip/repos')
+    .then(response => {
+        let num1 = response.length
+        requestData('https://api.github.com/repos/trustoverip/deliverables/contents/recommendations')
+        .then(response => {
+            let num2 = response.length
+            return resolve(num1 + num2) + 1;
+        })
+        .catch(err => {
+            console.log('Request Error', err)
+            return reject('Error calculating num 2');
+        });
+    })
+    .catch(err => {
+        console.log('Request Error', err)
+        reject('Error calculating num 2');
+    });
+});
+
+
+number()
+.then(num => {
+    document.getElementById("num").innerText = num.toString().padStart(4, '0');
+})
+.catch(err => {
+    console.log('Error calculating number', err)
+});
     </script>
 </head>
 <body>
@@ -44,6 +70,6 @@ href="https://github.com/trustoverip/deliverables/blob/master/README.md">ToIP De
 until just before you're ready to submit a PR. If there's a lag between
 when you grab this number and when you submit the PR, there's a chance
 that someone else will use your number before you do.</p>
-<input type="button" onclick="getNum()" value="Refresh"/>
+<input type="button" onclick=window.location.reload(); value="Refresh"/>
 </body>
 </html>
