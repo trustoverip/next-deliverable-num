@@ -6,4 +6,4 @@ that tells you what `unique number` you should pick for your new <a target="_bla
 ToIP Deliverable Submission</a>.
 
 ## Acknowledgements
-This repo is influenced and derived from the fine work of Daniel Hardman and his [Aries RFC Number Generator](https://github.com/dhh1128/next-aries-rfc-num).
+This repo is influenced by the fine work of Daniel Hardman and his [Aries RFC Number Generator](https://github.com/dhh1128/next-aries-rfc-num) with [JS Promise](https://javascript.info/promise-basics) enhancements suggested by [Daniel N. Gisolfi](https://github.com/dgisolfi).
