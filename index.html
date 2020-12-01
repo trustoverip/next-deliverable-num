@@ -23,6 +23,7 @@ requestData = (href) => new Promise((resolve, reject) => {
         return response.json();
     })
     .then(data => {
+        console.log(data);
         return resolve(data);
     }).catch((err) => {
         console.warn('Request Error.', err);
@@ -38,7 +39,7 @@ number = () => new Promise((resolve, reject) => {
         requestData('https://api.github.com/repos/trustoverip/deliverables/contents/recommendations')
         .then(response => {
             let num2 = response.length
-            return resolve(num1 + num2) + 1;
+            return resolve(num1 + num2 + 1);
         })
         .catch(err => {
             console.log('Request Error', err)
